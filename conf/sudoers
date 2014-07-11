@@ -1,0 +1,2 @@
+root        ALL=(ALL:ALL) ALL
+hdfs        ALL=(ALL:ALL) ALL
