@@ -2,9 +2,9 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <configuration>
-	
+
   <property>
-    <name>fs.defaultFS</name>
+    <name>fs.default.name</name>
     <value>hdfs://localhost:8020</value>
   </property>
 

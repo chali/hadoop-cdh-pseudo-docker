@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <configuration>
-	
+
   <property>
     <name>dfs.replication</name>
     <value>1</value>
@@ -17,7 +17,7 @@
      <name>dfs.safemode.min.datanodes</name>
      <value>1</value>
   </property>
-  
+
   <property>
      <name>hadoop.tmp.dir</name>
      <value>/var/lib/hadoop-hdfs/cache/${user.name}</value>
@@ -34,7 +34,7 @@
      <name>dfs.datanode.data.dir</name>
      <value>file:///var/lib/hadoop-hdfs/cache/${user.name}/dfs/data</value>
   </property>
-  
+
   <property>
     <name>dfs.namenode.rpc-bind-host</name>
     <value>0.0.0.0</value>
@@ -43,5 +43,5 @@
     <name>dfs.namenode.servicerpc-bind-host</name>
     <value>0.0.0.0</value>
   </property>
-  
+
 </configuration>

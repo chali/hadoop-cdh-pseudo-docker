@@ -16,4 +16,7 @@ service hadoop-mapreduce-historyserver start
 sudo -u hdfs hadoop fs -mkdir -p /user/hdfs
 sudo -u hdfs hadoop fs -chown hdfs /user/hdfs
 
-/bin/bash
+sleep 1
+
+# tail log directory
+tail -n 1000 -f /var/log/hadoop-*/*.out
