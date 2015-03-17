@@ -16,6 +16,11 @@ service hadoop-mapreduce-historyserver start
 sudo -u hdfs hadoop fs -mkdir -p /user/hdfs
 sudo -u hdfs hadoop fs -chown hdfs /user/hdfs
 
+#init oozie db
+/usr/lib/oozie/bin/ooziedb.sh create -run
+
+service oozie start
+
 sleep 1
 
 # tail log directory

@@ -10,6 +10,7 @@ RUN dpkg -i cdh5-repository_1.0_all.deb
 RUN curl -s http://archive.cloudera.com/cdh5/ubuntu/precise/amd64/cdh/archive.key | apt-key add -
 RUN apt-get update
 RUN apt-get install -y hadoop-conf-pseudo
+RUN apt-get install -y oozie
 
 #Copy updated config files
 ADD conf/core-site.xml /etc/hadoop/conf/core-site.xml
@@ -23,6 +24,8 @@ RUN sudo -u hdfs hdfs namenode -format
 
 ADD conf/run-hadoop.sh /usr/bin/run-hadoop.sh
 RUN chmod +x /usr/bin/run-hadoop.sh
+
+RUN /usr/lib/oozie/bin/ooziedb.sh create -run
 
 # NameNode (HDFS)
 EXPOSE 8020 50070
@@ -38,5 +41,8 @@ EXPOSE 8040 8042
 
 # JobHistoryServer
 EXPOSE 10020 19888
+
+# Oozie
+EXPOSE 11000
 
 CMD ["/usr/bin/run-hadoop.sh"]
