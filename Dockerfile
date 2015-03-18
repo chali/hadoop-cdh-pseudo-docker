@@ -25,7 +25,9 @@ RUN sudo -u hdfs hdfs namenode -format
 ADD conf/run-hadoop.sh /usr/bin/run-hadoop.sh
 RUN chmod +x /usr/bin/run-hadoop.sh
 
-RUN /usr/lib/oozie/bin/ooziedb.sh create -run
+RUN sudo -u oozie /usr/lib/oozie/bin/ooziedb.sh create -run
+RUN curl http://archive.cloudera.com/gplextras/misc/ext-2.2.zip > ext.zip
+RUN unzip ext.zip -d /var/lib/oozie
 
 # NameNode (HDFS)
 EXPOSE 8020 50070
