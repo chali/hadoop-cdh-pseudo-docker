@@ -4,25 +4,36 @@ MAINTAINER Martin Chalupa <chalimartines@gmail.com>
 #Base image doesn't start in root
 WORKDIR /
 
+#Add the CDH 5 repository
+RUN sudo wget 'http://archive.cloudera.com/cdh5/ubuntu/trusty/amd64/cdh/cloudera.list' -O /etc/apt/sources.list.d/cloudera.list
+#Set preference for cloudera packages
+COPY conf/cloudera.pref /etc/apt/preferences.d/cloudera.pref
+
+#Add a Repository Key
+RUN wget http://archive.cloudera.com/cdh5/ubuntu/trusty/amd64/cdh/archive.key -O archive.key && sudo apt-key add archive.key && \
+    sudo apt-get update
+
 #Install CDH package
-RUN curl http://archive.cloudera.com/cdh5/one-click-install/precise/amd64/cdh5-repository_1.0_all.deb > cdh5-repository_1.0_all.deb
-RUN dpkg -i cdh5-repository_1.0_all.deb
-RUN curl -s http://archive.cloudera.com/cdh5/ubuntu/precise/amd64/cdh/archive.key | apt-key add -
-RUN apt-get update
-RUN apt-get install -y hadoop-conf-pseudo
+RUN sudo apt-get install -y zookeeper-server && \
+    sudo apt-get install -y hadoop-conf-pseudo && \
+    sudo apt-get install -y oozie
 
 #Copy updated config files
-ADD conf/core-site.xml /etc/hadoop/conf/core-site.xml
-ADD conf/hdfs-site.xml /etc/hadoop/conf/hdfs-site.xml
-ADD conf/mapred-site.xml /etc/hadoop/conf/mapred-site.xml
-ADD conf/hadoop-env.sh /etc/hadoop/conf/hadoop-env.sh
-ADD conf/yarn-site.xml /etc/hadoop/conf/yarn-site.xml
+COPY conf/core-site.xml /etc/hadoop/conf/core-site.xml
+COPY conf/hdfs-site.xml /etc/hadoop/conf/hdfs-site.xml
+COPY conf/mapred-site.xml /etc/hadoop/conf/mapred-site.xml
+COPY conf/hadoop-env.sh /etc/hadoop/conf/hadoop-env.sh
+COPY conf/yarn-site.xml /etc/hadoop/conf/yarn-site.xml
 
 #Format HDFS
 RUN sudo -u hdfs hdfs namenode -format
 
-ADD conf/run-hadoop.sh /usr/bin/run-hadoop.sh
+COPY conf/run-hadoop.sh /usr/bin/run-hadoop.sh
 RUN chmod +x /usr/bin/run-hadoop.sh
+
+RUN sudo -u oozie /usr/lib/oozie/bin/ooziedb.sh create -run && \
+    wget http://archive.cloudera.com/gplextras/misc/ext-2.2.zip -O ext.zip && \
+    unzip ext.zip -d /var/lib/oozie
 
 # NameNode (HDFS)
 EXPOSE 8020 50070
