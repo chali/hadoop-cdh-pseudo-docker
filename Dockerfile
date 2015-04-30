@@ -5,7 +5,7 @@ MAINTAINER Martin Chalupa <chalimartines@gmail.com>
 WORKDIR /
 
 #Add the CDH 5 repository
-RUN sudo wget 'http://archive.cloudera.com/cdh5/ubuntu/trusty/amd64/cdh/cloudera.list' -O /etc/apt/sources.list.d/cloudera.list
+COPY conf/cloudera.list /etc/apt/sources.list.d/cloudera.list
 #Set preference for cloudera packages
 COPY conf/cloudera.pref /etc/apt/preferences.d/cloudera.pref
 
