@@ -1,4 +1,4 @@
-FROM dockerfile/java:oracle-java7
+FROM nimmis/java:oracle-7-jdk
 MAINTAINER Martin Chalupa <chalimartines@gmail.com>
 
 #Base image doesn't start in root
