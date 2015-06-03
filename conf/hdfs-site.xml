@@ -44,4 +44,9 @@
     <value>0.0.0.0</value>
   </property>
 
+  <property>
+    <name>dfs.webhdfs.enabled</name>
+    <value>true</value>
+  </property>
+
 </configuration>

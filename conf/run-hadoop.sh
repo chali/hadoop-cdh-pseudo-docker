@@ -23,6 +23,8 @@ sudo oozie-setup sharelib create -fs hdfs://localhost:8020 -locallib /usr/lib/oo
 
 service oozie start
 
+service hue start
+
 sleep 1
 
 # tail log directory
