@@ -9,6 +9,7 @@ Docker image was prepared according to [Installing CDH 5 with YARN on a Single L
 * YARN
 * JobHistoryServer
 * Oozie
+* Hue
 
 ###Execution
 Get docker image
@@ -17,7 +18,7 @@ Get docker image
 
 Run image with specified port mapping
 
-    docker run --name cdh -d -p 8020:8020 -p 50070:50070 -p 50010:50010 -p 50020:50020 -p 50075:50075 -p 8030:8030 -p 8031:8031 -p 8032:8032 -p 8033:8033 -p 8088:8088 -p 8040:8040 -p 8042:8042 -p 10020:10020 -p 19888:19888 -p 11000:11000 chalimartines/cdh5-pseudo-distributed
+    docker run --name cdh -d -p 8020:8020 -p 50070:50070 -p 50010:50010 -p 50020:50020 -p 50075:50075 -p 8030:8030 -p 8031:8031 -p 8032:8032 -p 8033:8033 -p 8088:8088 -p 8040:8040 -p 8042:8042 -p 10020:10020 -p 19888:19888 -p 11000:11000 -p 8888:8888 chalimartines/cdh5-pseudo-distributed
 
  Or you can use docker-compose configuration from [here](https://github.com/chali/cdh5-pseudo-distributed-cluster-docker-compose)
   
@@ -38,3 +39,15 @@ If you are Mac OS user with boot2docker and you would like to get from your loca
 	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port10020,tcp,,10020,,10020"
 	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port19888,tcp,,19888,,19888"
 	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port11000,tcp,,11000,,11000"
+	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8888,tcp,,8888,,8888"
+
+###UI entry points
+Those urls consider port forwarding from localhost.
+* name node - http://localhost:50070
+* resource manager - http://localhost:8088
+* job history server - http://localhost:19888
+* oozie console - http://localhost:11000
+* hue - http://localhost:8888
+
+####Hue login
+You will be asked to create account during the first login. You can pick your prefered username and password. It will create home folder on HDFS and it can be used as hadoop user.
