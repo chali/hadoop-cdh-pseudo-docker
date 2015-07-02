@@ -40,6 +40,7 @@ If you are Mac OS user with boot2docker and you would like to get from your loca
 	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port19888,tcp,,19888,,19888"
 	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port11000,tcp,,11000,,11000"
 	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8888,tcp,,8888,,8888"
+    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port9999,tcp,,9999,,9999"
 
 ###UI entry points
 Those urls consider port forwarding from localhost.
@@ -51,3 +52,6 @@ Those urls consider port forwarding from localhost.
 
 ####Hue login
 You will be asked to create account during the first login. You can pick your prefered username and password. It will create home folder on HDFS and it can be used as hadoop user.
+
+####Custom port for your usecases
+This image has exposed one port (9999). It is not used by any currently running service. It can be used by you for example when you need to attach debugger to running mapreduce job. So your mapreduce job can start debugging server on this port.

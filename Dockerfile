@@ -59,4 +59,7 @@ EXPOSE 10020 19888
 # Hue
 EXPOSE 8888
 
+# Technical port which can be used for your custom purpose.
+EXPOSE 9999
+
 CMD ["/usr/bin/run-hadoop.sh"]
