@@ -21,7 +21,8 @@ RUN sudo apt-get install -y zookeeper-server && \
     sudo apt-get install -y oozie && \
     sudo apt-get install -y python2.7 && \
     sudo apt-get install -y hue && \
-    sudo apt-get install -y hue-plugins
+    sudo apt-get install -y hue-plugins && \
+    sudo apt-get install -y spark-core spark-history-server spark-python
 
 #Copy updated config files
 COPY conf/core-site.xml /etc/hadoop/conf/core-site.xml
@@ -29,6 +30,7 @@ COPY conf/hdfs-site.xml /etc/hadoop/conf/hdfs-site.xml
 COPY conf/mapred-site.xml /etc/hadoop/conf/mapred-site.xml
 COPY conf/hadoop-env.sh /etc/hadoop/conf/hadoop-env.sh
 COPY conf/yarn-site.xml /etc/hadoop/conf/yarn-site.xml
+COPY conf/spark-defaults.conf /etc/spark/conf/spark-defaults.conf
 COPY conf/hue.ini /etc/hue/conf/hue.ini
 
 #Format HDFS
@@ -58,6 +60,9 @@ EXPOSE 10020 19888
 
 # Hue
 EXPOSE 8888
+
+# Spark history server
+EXPOSE 18080
 
 # Technical port which can be used for your custom purpose.
 EXPOSE 9999

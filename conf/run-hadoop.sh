@@ -23,6 +23,19 @@ sudo oozie-setup sharelib create -fs hdfs://localhost:8020 -locallib /usr/lib/oo
 
 service oozie start
 
+#init spark history server
+sudo -u hdfs hadoop fs -mkdir /user/spark
+sudo -u hdfs hadoop fs -mkdir /user/spark/applicationHistory
+sudo -u hdfs hadoop fs -chown -R spark:spark /user/spark
+sudo -u hdfs hadoop fs -chmod 1777 /user/spark/applicationHistory
+
+#init spark shared libraries
+#client than can use SPARK_JAR=hdfs://<nn>:<port>/user/spark/share/lib/spark-assembly.jar
+sudo -u spark hadoop fs -mkdir -p /user/spark/share/lib 
+sudo -u spark hadoop fs -put /usr/lib/spark/lib/spark-assembly.jar /user/spark/share/lib/spark-assembly.jar 
+
+service spark-history-server start
+
 service hue start
 
 sleep 1
