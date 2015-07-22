@@ -1,4 +1,4 @@
-FROM nimmis/java:oracle-7-jdk
+FROM nimmis/java:oracle-8-jdk
 MAINTAINER Martin Chalupa <chalimartines@gmail.com>
 
 #Base image doesn't start in root
@@ -30,6 +30,7 @@ COPY conf/hdfs-site.xml /etc/hadoop/conf/hdfs-site.xml
 COPY conf/mapred-site.xml /etc/hadoop/conf/mapred-site.xml
 COPY conf/hadoop-env.sh /etc/hadoop/conf/hadoop-env.sh
 COPY conf/yarn-site.xml /etc/hadoop/conf/yarn-site.xml
+COPY conf/oozie-site.xml /etc/oozie/conf/oozie-site.xml
 COPY conf/spark-defaults.conf /etc/spark/conf/spark-defaults.conf
 COPY conf/hue.ini /etc/hue/conf/hue.ini
 
