@@ -1,10 +1,10 @@
-#CDH 5 pseudo-distributed cluster Docker image
+# CDH 5 pseudo-distributed cluster Docker image
 
 Do you develop Hadoop mapreduce applications on top of Cloudera distribution? This docker image can help you. It contains basic CDH 5 setup with YARN. You can use it for developmeent and verification of your code in local environment without messing up your system with Hadoop instalation.
 
 Docker image was prepared according to [Installing CDH 5 with YARN on a Single Linux Node in Pseudo-distributed mode](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH5/latest/CDH5-Quick-Start/cdh5qs_yarn_pseudo.html) with a few adjustments for Docker environment.
 
-#####Installed services
+##### Installed services
 * HDFS
 * YARN
 * JobHistoryServer
@@ -12,7 +12,7 @@ Docker image was prepared according to [Installing CDH 5 with YARN on a Single L
 * Hue
 * Spark (instalation for execution on top of YARN)
 
-###Execution
+### Execution
 Get docker image
 
     docker pull chalimartines/cdh5-pseudo-distributed
@@ -44,7 +44,7 @@ If you are Mac OS user with boot2docker and you would like to get from your loca
     VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port9999,tcp,,9999,,9999"
     VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port18080,tcp,,18080,,18080"
 
-###UI entry points
+### UI entry points
 Those urls consider port forwarding from localhost.
 * name node - http://localhost:50070
 * resource manager - http://localhost:8088
@@ -53,8 +53,8 @@ Those urls consider port forwarding from localhost.
 * hue - http://localhost:8888
 * spark history server - http://localhost:18080
 
-####Hue login
+#### Hue login
 You will be asked to create account during the first login. You can pick your prefered username and password. It will create home folder on HDFS and it can be used as hadoop user.
 
-####Custom port for your usecases
+#### Custom port for your usecases
 This image has exposed one port (9999). It is not used by any currently running service. It can be used by you for example when you need to attach debugger to running mapreduce job. So your mapreduce job can start debugging server on this port.
