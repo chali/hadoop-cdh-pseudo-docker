@@ -10,7 +10,7 @@ Docker image was prepared according to [Installing CDH 5 with YARN on a Single L
 * JobHistoryServer
 * Oozie
 * Hue
-* Spark (instalation for execution on top of YARN)
+* Spark (installation for execution on top of YARN)
 
 ### Execution
 Get docker image
@@ -23,26 +23,26 @@ Run image with specified port mapping
 
  Or you can use docker-compose configuration from [here](https://github.com/chali/cdh5-pseudo-distributed-cluster-docker-compose)
   
-If you are Mac OS user with boot2docker and you would like to get from your local system to a cdh container add these port forwardings
+If you are Mac OS user with docker machine with virtualbox driver and you would like to get from your local system to a cdh container add these port forwardings. Name of virtual machine is equal to your docker machine name (here it is "dev").
 
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8020,tcp,,8020,,8020"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port50070,tcp,,50070,,50070"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port50010,tcp,,50010,,50010"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port50020,tcp,,50020,,50020"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port50075,tcp,,50075,,50075"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8030,tcp,,8030,,8030"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8031,tcp,,8031,,8031"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8032,tcp,,8032,,8032"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8033,tcp,,8033,,8033"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8088,tcp,,8088,,8088"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8040,tcp,,8040,,8040"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8042,tcp,,8042,,8042"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port10020,tcp,,10020,,10020"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port19888,tcp,,19888,,19888"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port11000,tcp,,11000,,11000"
-	VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8888,tcp,,8888,,8888"
-    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port9999,tcp,,9999,,9999"
-    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port18080,tcp,,18080,,18080"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port8020,tcp,,8020,,8020"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port50070,tcp,,50070,,50070"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port50010,tcp,,50010,,50010"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port50020,tcp,,50020,,50020"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port50075,tcp,,50075,,50075"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port8030,tcp,,8030,,8030"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port8031,tcp,,8031,,8031"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port8032,tcp,,8032,,8032"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port8033,tcp,,8033,,8033"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port8088,tcp,,8088,,8088"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port8040,tcp,,8040,,8040"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port8042,tcp,,8042,,8042"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port10020,tcp,,10020,,10020"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port19888,tcp,,19888,,19888"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port11000,tcp,,11000,,11000"
+	VBoxManage modifyvm "dev" --natpf1 "tcp-port8888,tcp,,8888,,8888"
+    VBoxManage modifyvm "dev" --natpf1 "tcp-port9999,tcp,,9999,,9999"
+    VBoxManage modifyvm "dev" --natpf1 "tcp-port18080,tcp,,18080,,18080"
 
 ### UI entry points
 Those urls consider port forwarding from localhost.
@@ -55,6 +55,9 @@ Those urls consider port forwarding from localhost.
 
 #### Hue login
 You will be asked to create account during the first login. You can pick your prefered username and password. It will create home folder on HDFS and it can be used as hadoop user.
+
+#### Mac OS and Docker in Virtualbox resource setting.
+This docker image doesn't completely follow  philosophy (one process = one image), but it prefers developer convenience to easily set up the whole hadoop dev stack. It comes with price and I recommend add resources to your virtualbox machine. I use 4 cores and 8GB RAM.
 
 #### Custom port for your usecases
 This image has exposed one port (9999). It is not used by any currently running service. It can be used by you for example when you need to attach debugger to running mapreduce job. So your mapreduce job can start debugging server on this port.
