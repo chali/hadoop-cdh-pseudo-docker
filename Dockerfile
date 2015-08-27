@@ -44,6 +44,18 @@ RUN sudo -u oozie /usr/lib/oozie/bin/ooziedb.sh create -run && \
     wget http://archive.cloudera.com/gplextras/misc/ext-2.2.zip -O ext.zip && \
     unzip ext.zip -d /var/lib/oozie
 
+#uninstall not necessary hue apps
+RUN /usr/lib/hue/tools/app_reg/app_reg.py --remove hbase && \
+    /usr/lib/hue/tools/app_reg/app_reg.py --remove impala && \
+    /usr/lib/hue/tools/app_reg/app_reg.py --remove beeswax && \
+    /usr/lib/hue/tools/app_reg/app_reg.py --remove spark && \
+    /usr/lib/hue/tools/app_reg/app_reg.py --remove search && \
+    /usr/lib/hue/tools/app_reg/app_reg.py --remove sqoop && \
+    /usr/lib/hue/tools/app_reg/app_reg.py --remove rdbms && \
+    /usr/lib/hue/tools/app_reg/app_reg.py --remove metastore && \
+    /usr/lib/hue/tools/app_reg/app_reg.py --remove zookeeper && \
+    /usr/lib/hue/tools/app_reg/app_reg.py --remove security
+
 # NameNode (HDFS)
 EXPOSE 8020 50070
 
