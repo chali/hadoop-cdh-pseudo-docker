@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<allocations>
+  <queueMaxAMShareDefault>0.8</queueMaxAMShareDefault>
+</allocations>

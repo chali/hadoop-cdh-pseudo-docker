@@ -9,6 +9,41 @@
   </property>
 
   <property>
+    <name>mapreduce.map.memory.mb</name>
+    <value>512</value>
+  </property>
+
+  <property>
+    <name>mapreduce.reduce.memory.mb</name>
+    <value>512</value>
+  </property>
+
+  <property>
+    <name>mapreduce.map.java.opts</name>
+    <value>-Djava.net.preferIPv4Stack=true -Xmx410M</value>
+  </property>
+
+  <property>
+    <name>mapreduce.reduce.java.opts</name>
+    <value>-Djava.net.preferIPv4Stack=true -Xmx410M</value>
+  </property>
+
+  <property>
+    <name>yarn.app.mapreduce.am.resource.mb</name>
+    <value>1024</value>
+  </property>
+
+  <property>
+    <name>yarn.app.mapreduce.am.command-opts</name>
+    <value>-Djava.net.preferIPv4Stack=true -Xmx820M</value>
+  </property>
+
+  <property>
+    <name>mapreduce.job.ubertask.enable</name>
+    <value>true</value>
+  </property>
+
+  <property>
     <description>To set the value of tmp directory for map and reduce tasks.</description>
     <name>mapreduce.task.tmp.dir</name>
     <value>/var/lib/hadoop-mapreduce/cache/${user.name}/tasks</value>
