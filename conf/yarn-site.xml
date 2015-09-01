@@ -2,6 +2,16 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <configuration>
+
+  <property>
+    <name>yarn.scheduler.minimum-allocation-mb</name>
+    <value>256</value>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.increment-allocation-mb</name>
+    <value>256</value>
+  </property>
   	
   <property>
     <name>yarn.nodemanager.aux-services</name>

@@ -30,6 +30,7 @@ COPY conf/hdfs-site.xml /etc/hadoop/conf/hdfs-site.xml
 COPY conf/mapred-site.xml /etc/hadoop/conf/mapred-site.xml
 COPY conf/hadoop-env.sh /etc/hadoop/conf/hadoop-env.sh
 COPY conf/yarn-site.xml /etc/hadoop/conf/yarn-site.xml
+COPY conf/fair-scheduler.xml /etc/hadoop/conf/fair-scheduler.xml
 COPY conf/spark-defaults.conf /etc/spark/conf/spark-defaults.conf
 COPY conf/hue.ini /etc/hue/conf/hue.ini
 
