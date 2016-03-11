@@ -35,6 +35,11 @@ COPY conf/oozie-site.xml /etc/oozie/conf/oozie-site.xml
 COPY conf/spark-defaults.conf /etc/spark/conf/spark-defaults.conf
 COPY conf/hue.ini /etc/hue/conf/hue.ini
 
+#Copy unsigned servlet-api jar
+RUN rm /usr/lib/oozie/oozie-sharelib/lib/spark/javax.servlet-3.0.0.*.jar
+COPY lib/javax.servlet-3.0.0.v201112011016_unsigned.jar \
+	 /usr/lib/oozie/oozie-sharelib/lib/spark/javax.servlet-3.0.0.v201112011016_unsigned.jar
+
 #Format HDFS
 RUN sudo -u hdfs hdfs namenode -format
 
