@@ -35,7 +35,8 @@ COPY conf/oozie-site.xml /etc/oozie/conf/oozie-site.xml
 COPY conf/spark-defaults.conf /etc/spark/conf/spark-defaults.conf
 COPY conf/hue.ini /etc/hue/conf/hue.ini
 
-#Copy unsigned servlet-api jar
+#Copy unsigned servlet-api jar, this is workaround for issue with conflicting servlet-api on classpath
+#Hadoop libraries will add version 2.5 and spark will add 3.0
 RUN rm /usr/lib/oozie/oozie-sharelib/lib/spark/javax.servlet-3.0.0.*.jar
 COPY lib/javax.servlet-3.0.0.v201112011016_unsigned.jar \
 	 /usr/lib/oozie/oozie-sharelib/lib/spark/javax.servlet-3.0.0.v201112011016_unsigned.jar
