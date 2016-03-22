@@ -19,6 +19,8 @@ sudo -u hdfs hadoop fs -chown hdfs /user/hdfs
 #init oozie
 sudo -u hdfs hadoop fs -mkdir /user/oozie
 sudo -u hdfs hadoop fs -chown oozie:oozie /user/oozie
+# delete hive-exec.jar which has jackson 1.9 bundled within and causes issues with missing fields in classes that rely on jackson 1.8.8
+rm /usr/lib/oozie/oozie-sharelib-yarn/lib/spark/hive-exec.jar
 sudo oozie-setup sharelib create -fs hdfs://localhost:8020 -locallib /usr/lib/oozie/oozie-sharelib-yarn
 
 service oozie start
