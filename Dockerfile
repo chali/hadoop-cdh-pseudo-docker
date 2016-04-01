@@ -1,21 +1,21 @@
 FROM nimmis/java:oracle-8-jdk
 MAINTAINER Martin Chalupa <chalimartines@gmail.com>
 
-#Base image doesn't start in root
+# Base image doesn't start in root
 WORKDIR /
 
-#Add the CDH 5 repository
+# Add the CDH 5 repository
 COPY conf/cloudera.list /etc/apt/sources.list.d/cloudera.list
-#Set preference for cloudera packages
+# Set preference for cloudera packages
 COPY conf/cloudera.pref /etc/apt/preferences.d/cloudera.pref
-#Add repository for python installation
+# Add repository for python installation
 COPY conf/python.list /etc/apt/sources.list.d/python.list
 
-#Add a Repository Key
+# Add a Repository Key
 RUN wget http://archive.cloudera.com/cdh5/ubuntu/trusty/amd64/cdh/archive.key -O archive.key && sudo apt-key add archive.key && \
     sudo apt-get update
 
-#Install CDH package and dependencies
+# Install CDH package and dependencies
 RUN sudo apt-get install -y zookeeper-server && \
     sudo apt-get install -y hadoop-conf-pseudo && \
     sudo apt-get install -y oozie && \
@@ -24,7 +24,7 @@ RUN sudo apt-get install -y zookeeper-server && \
     sudo apt-get install -y hue-plugins && \
     sudo apt-get install -y spark-core spark-history-server spark-python
 
-#Copy updated config files
+# Copy updated config files
 COPY conf/core-site.xml /etc/hadoop/conf/core-site.xml
 COPY conf/hdfs-site.xml /etc/hadoop/conf/hdfs-site.xml
 COPY conf/mapred-site.xml /etc/hadoop/conf/mapred-site.xml
@@ -35,13 +35,7 @@ COPY conf/oozie-site.xml /etc/oozie/conf/oozie-site.xml
 COPY conf/spark-defaults.conf /etc/spark/conf/spark-defaults.conf
 COPY conf/hue.ini /etc/hue/conf/hue.ini
 
-#Copy unsigned servlet-api jar, this is workaround for issue with conflicting servlet-api on classpath
-#Hadoop libraries will add version 2.5 and spark will add 3.0
-RUN rm /usr/lib/oozie/oozie-sharelib/lib/spark/javax.servlet-3.0.0.*.jar
-COPY lib/javax.servlet-3.0.0.v201112011016_unsigned.jar \
-	 /usr/lib/oozie/oozie-sharelib/lib/spark/javax.servlet-3.0.0.v201112011016_unsigned.jar
-
-#Format HDFS
+# Format HDFS
 RUN sudo -u hdfs hdfs namenode -format
 
 COPY conf/run-hadoop.sh /usr/bin/run-hadoop.sh

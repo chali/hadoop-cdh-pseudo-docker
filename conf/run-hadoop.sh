@@ -16,23 +16,21 @@ service hadoop-mapreduce-historyserver start
 sudo -u hdfs hadoop fs -mkdir -p /user/hdfs
 sudo -u hdfs hadoop fs -chown hdfs /user/hdfs
 
-#init oozie
+# init oozie
 sudo -u hdfs hadoop fs -mkdir /user/oozie
 sudo -u hdfs hadoop fs -chown oozie:oozie /user/oozie
-# delete hive-exec.jar which has jackson 1.9 bundled within and causes issues with missing fields in classes that rely on jackson 1.8.8
-rm /usr/lib/oozie/oozie-sharelib-yarn/lib/spark/hive-exec.jar
 sudo oozie-setup sharelib create -fs hdfs://localhost:8020 -locallib /usr/lib/oozie/oozie-sharelib-yarn
 
 service oozie start
 
-#init spark history server
+# init spark history server
 sudo -u hdfs hadoop fs -mkdir /user/spark
 sudo -u hdfs hadoop fs -mkdir /user/spark/applicationHistory
 sudo -u hdfs hadoop fs -chown -R spark:spark /user/spark
 sudo -u hdfs hadoop fs -chmod 1777 /user/spark/applicationHistory
 
-#init spark shared libraries
-#client than can use SPARK_JAR=hdfs://<nn>:<port>/user/spark/share/lib/spark-assembly.jar
+# init spark shared libraries
+# client than can use SPARK_JAR=hdfs://<nn>:<port>/user/spark/share/lib/spark-assembly.jar
 sudo -u spark hadoop fs -mkdir -p /user/spark/share/lib 
 sudo -u spark hadoop fs -put /usr/lib/spark/lib/spark-assembly.jar /user/spark/share/lib/spark-assembly.jar 
 
