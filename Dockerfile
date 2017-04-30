@@ -1,4 +1,4 @@
-FROM nimmis/java:oracle-8-jdk
+FROM nimmis/java:14.04-oracle-8-jdk
 MAINTAINER Martin Chalupa <chalimartines@gmail.com>
 
 # Base image doesn't start in root
